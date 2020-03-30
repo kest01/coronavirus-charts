@@ -5,20 +5,20 @@ import './index.scss'
 
 const columns = [
         {
-            Header: 'Age',
-            accessor: 'age',
+            Header: 'Country',
+            accessor: 'country',
         },
         {
-            Header: 'Visits',
-            accessor: 'visits',
+            Header: 'Confirmed',
+            accessor: 'confirmed',
         },
         {
-            Header: 'Status',
-            accessor: 'status',
+            Header: 'Deaths',
+            accessor: 'deaths',
         },
         {
-            Header: 'Profile Progress',
-            accessor: 'progress',
+            Header: 'Recovered',
+            accessor: 'recovered',
         },
     ];
 
@@ -43,7 +43,7 @@ export default function Table({ data }: Props) {
 
     return (
         <>
-            <table class={"ReactTable"} {...getTableProps()}>
+            <table className={"ReactTable"} {...getTableProps()}>
                 <thead>
                 {headerGroups.map(headerGroup => (
                     <tr {...headerGroup.getHeaderGroupProps()}>
@@ -81,7 +81,6 @@ export default function Table({ data }: Props) {
                 </tbody>
             </table>
             <br />
-            <div>Showing the first 20 results of {rows.length} rows</div>
         </>
     )
 }

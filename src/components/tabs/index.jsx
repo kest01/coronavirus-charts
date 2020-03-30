@@ -1,10 +1,9 @@
-// @flow
 import React from 'react';
 import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
 import 'react-tabs/style/react-tabs.css';
 import GlobalViewTable from '../global-view';
 
-export default () => (
+export default (props) => (
     <Tabs>
         <TabList>
             <Tab>Global view</Tab>
@@ -13,17 +12,7 @@ export default () => (
         </TabList>
 
         <TabPanel>
-            <GlobalViewTable data={[{
-                age: 12,
-                visits: 100,
-                status: 'Done',
-                progress: 'false'
-            }, {
-                age: 18,
-                visits: 500,
-                status: 'None',
-                progress: 'true'
-            }]}/>
+            <GlobalViewTable data={props.globalViewByCountries}/>
         </TabPanel>
         <TabPanel>
             <h2>Any content 2</h2>
