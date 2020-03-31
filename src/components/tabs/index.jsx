@@ -2,6 +2,7 @@ import React from 'react';
 import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
 import 'react-tabs/style/react-tabs.css';
 import GlobalViewTable from '../global-view';
+import { DetailCharts } from '../detail-charts';
 import { filterFavorite } from '../../processing/processDataUtils'
 
 export default (props) => (
@@ -9,7 +10,7 @@ export default (props) => (
         <TabList>
             <Tab>Global view</Tab>
             <Tab>Favorite countries</Tab>
-            <Tab>Comparison</Tab>
+            <Tab>Details</Tab>
         </TabList>
 
         <TabPanel>
@@ -19,7 +20,7 @@ export default (props) => (
             <GlobalViewTable data={filterFavorite(props.globalViewByCountries)}/>
         </TabPanel>
         <TabPanel>
-            <h2>Any content 3</h2>
+            <DetailCharts countries={props.countries}/>
         </TabPanel>
     </Tabs>
 );

@@ -11,11 +11,10 @@ const mapDispatchToProps = dispatch => ({
 });
 
 const mergeProps = (stateProps, dispatchProps) => {
-    console.log(stateProps);
-    console.log(dispatchProps);
     return {
         ...stateProps,
         ...dispatchProps,
+        countries: processors.dataToCountryList(stateProps.data),
         globalViewByCountries: processors.dataToGlobalViewByCountries(stateProps.data)
     }
 };

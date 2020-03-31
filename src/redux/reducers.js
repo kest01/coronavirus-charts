@@ -12,9 +12,6 @@ const initialState: AppStore = {
 };
 
 export default (state: AppStore = initialState, action: any) => {
-    console.log(`Reducer executed for action ${action.type} `);
-    console.log(state);
-
     switch (action.type) {
         case types.LOAD_DATA_REQUEST:
             return {

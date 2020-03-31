@@ -29,6 +29,10 @@ export const dataToGlobalViewByCountries = (data: Data) => {
     return result
 };
 
+export const dataToCountryList = (data: Data): Array<string> => {
+    return Object.entries(data).map(( [k] ) => k);
+};
+
 const parseArrayData = (country: string, data: Array<DataItem>): CountrySummary => {
     const lastTwoDays = data.slice(-2);
     return {

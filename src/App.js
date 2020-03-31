@@ -10,8 +10,6 @@ import type { AppStore } from './redux/reducers'
 class App extends React.Component<AppStore> {
 
     componentDidMount(): void {
-        console.log('loadDataAction')
-        console.debug();
         this.props.loadDataAction()
     }
 
