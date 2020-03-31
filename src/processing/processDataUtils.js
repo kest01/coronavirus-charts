@@ -7,7 +7,8 @@ type Data = { [string]: Array<DataItem> }
 type VirusFields = {
     confirmed: number,
     deaths: number,
-    recovered: number
+    recovered: number,
+    active: number,
 }
 
 type DataItem = VirusFields & {|
@@ -37,14 +38,20 @@ const parseArrayData = (country: string, data: Array<DataItem>): CountrySummary 
     const lastTwoDays = data.slice(-2);
     return {
         country,
-        total: lastTwoDays[1],
+        total: {
+            ...lastTwoDays[1],
+            active: getActive(lastTwoDays[1])
+        },
         last: {
             confirmed: lastTwoDays[1].confirmed - lastTwoDays[0].confirmed,
             deaths: lastTwoDays[1].deaths - lastTwoDays[0].deaths,
             recovered: lastTwoDays[1].recovered - lastTwoDays[0].recovered,
+            active: getActive(lastTwoDays[1]) - getActive(lastTwoDays[0])
         }
     }
 };
+
+const getActive = (item: VirusFields): number => item.confirmed - item.recovered - item.deaths
 
 export const filterFavorite = (data: Array<CountrySummary>): Array<CountrySummary> =>
     data.filter(item => favoriteCountries.includes(item.country));

@@ -32,6 +32,14 @@ const columns = [
             Header: 'Last recovered',
             accessor: 'last.recovered',
         },
+        {
+            Header: 'Total active',
+            accessor: 'total.active',
+        },
+        {
+            Header: 'Active change',
+            accessor: 'last.active',
+        },
     ];
 
 type Props = {
