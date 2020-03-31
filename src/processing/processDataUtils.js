@@ -1,5 +1,7 @@
 // @flow
 
+const favoriteCountries = ['Russia', 'Ukraine', 'Belarus', 'US', 'Italy', 'Israel', 'China', 'Spain', 'Germany'];
+
 type Data = { [string]: Array<DataItem> }
 
 type VirusFields = {
@@ -39,6 +41,9 @@ const parseArrayData = (country: string, data: Array<DataItem>): CountrySummary 
         }
     }
 };
+
+export const filterFavorite = (data: Array<CountrySummary>): Array<CountrySummary> =>
+    data.filter(item => favoriteCountries.includes(item.country));
 
 /*
 const parseArrayData = (data: Array<DataItem>): DataItem => data.reduce((acc: DataItem, item: DataItem): DataItem => {

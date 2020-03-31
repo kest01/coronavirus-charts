@@ -2,6 +2,7 @@ import React from 'react';
 import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
 import 'react-tabs/style/react-tabs.css';
 import GlobalViewTable from '../global-view';
+import { filterFavorite } from '../../processing/processDataUtils'
 
 export default (props) => (
     <Tabs>
@@ -15,7 +16,7 @@ export default (props) => (
             <GlobalViewTable data={props.globalViewByCountries}/>
         </TabPanel>
         <TabPanel>
-            <h2>Any content 2</h2>
+            <GlobalViewTable data={filterFavorite(props.globalViewByCountries)}/>
         </TabPanel>
         <TabPanel>
             <h2>Any content 3</h2>
