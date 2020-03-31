@@ -9,16 +9,28 @@ const columns = [
             accessor: 'country',
         },
         {
-            Header: 'Confirmed',
-            accessor: 'confirmed',
+            Header: 'Total cases',
+            accessor: 'total.confirmed',
         },
         {
-            Header: 'Deaths',
-            accessor: 'deaths',
+            Header: 'New cases',
+            accessor: 'last.confirmed',
         },
         {
-            Header: 'Recovered',
-            accessor: 'recovered',
+            Header: 'Total deaths',
+            accessor: 'total.deaths',
+        },
+        {
+            Header: 'Last deaths',
+            accessor: 'last.deaths',
+        },
+        {
+            Header: 'Total recovered',
+            accessor: 'total.recovered',
+        },
+        {
+            Header: 'Last recovered',
+            accessor: 'last.recovered',
         },
     ];
 
@@ -37,6 +49,9 @@ export default function Table({ data }: Props) {
         {
             columns,
             data,
+            initialState: {
+                sortBy: [{ id: 'total.confirmed', desc: true }]
+            }
         },
         useSortBy
     );
