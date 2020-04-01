@@ -2,8 +2,6 @@
 
 const favoriteCountries = ['Russia', 'Ukraine', 'Belarus', 'US', 'Italy', 'Israel', 'China', 'Spain', 'Germany'];
 
-type Data = { [string]: Array<DataItem> }
-
 type VirusFields = {
     confirmed: number,
     deaths: number,
@@ -14,6 +12,8 @@ type VirusFields = {
 type DataItem = VirusFields & {|
     date?: string,
 |}
+
+type Data = { [string]: Array<DataItem> }
 
 type CountrySummary = {
     country: string,

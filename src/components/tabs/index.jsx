@@ -20,7 +20,7 @@ export default (props) => (
             <GlobalViewTable data={filterFavorite(props.globalViewByCountries)}/>
         </TabPanel>
         <TabPanel>
-            <DetailCharts countries={props.countries}/>
+            <DetailCharts countries={props.countries} country={'Russia'}/>
         </TabPanel>
     </Tabs>
 );

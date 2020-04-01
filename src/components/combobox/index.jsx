@@ -9,17 +9,10 @@ type Props = {
 }
 
 export class Combobox extends React.Component<Props> {
-    handleChange: (event: any) => void;
 
-    constructor(props: Props) {
-        super(props);
-
-        this.handleChange = this.handleChange.bind(this);
-    }
-
-    handleChange(event: any) {
+    handleChange = (event: any) => {
         this.props.onChange(event.target.value)
-    }
+    };
 
     render() {
         const {

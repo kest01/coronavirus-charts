@@ -4,18 +4,32 @@ import React from 'react';
 import { Combobox } from '../combobox'
 
 type Props = {
-    countries: Array<string>
+    countries: Array<string>,
+    country: string
 }
 
-export class DetailCharts extends React.Component<Props> {
+type State = {
+    country: string
+}
 
-    handleChangeCountry(country: string) {
-        console.log(country);
+export class DetailCharts extends React.Component<Props, State> {
+
+    constructor(props: Props) {
+        super(props);
+
+        this.state = {
+            country: props.country,
+        }
     }
+
+    handleChangeCountry = (country: string) => {
+        console.log(country);
+        this.setState({ country: country });
+    };
 
     render() {
         return <div>
-            <Combobox items={this.props.countries} selected={'Russia'} onChange={this.handleChangeCountry}/>
+            <Combobox items={this.props.countries} selected={this.state.country} onChange={this.handleChangeCountry}/>
         </div>;
     }
 
