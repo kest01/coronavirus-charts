@@ -9,17 +9,19 @@ type VirusFields = {
     active: number,
 }
 
-type DataItem = VirusFields & {|
+export type DataItem = VirusFields & {|
     date?: string,
 |}
 
-type Data = { [string]: Array<DataItem> }
+export type Data = { [string]: Array<DataItem> }
 
 type CountrySummary = {
     country: string,
     total: VirusFields,
     last: VirusFields,
 }
+
+type ChartData = Array<Array<number>>
 
 export const dataToGlobalViewByCountries = (data: Data) => {
     const result: Array<CountrySummary> = [];
@@ -55,6 +57,11 @@ const getActive = (item: VirusFields): number => item.confirmed - item.recovered
 
 export const filterFavorite = (data: Array<CountrySummary>): Array<CountrySummary> =>
     data.filter(item => favoriteCountries.includes(item.country));
+
+export const getCountryChartData = (countryItems: Array<DataItem>, itemValue: (item: VirusFields) => number, threshold: number = 0): ChartData =>
+    countryItems
+        .filter(item => item.confirmed > threshold)
+        .map(item => [Date.parse(item.date ? item.date : ''), itemValue(item)]);
 
 /*
 const parseArrayData = (data: Array<DataItem>): DataItem => data.reduce((acc: DataItem, item: DataItem): DataItem => {
