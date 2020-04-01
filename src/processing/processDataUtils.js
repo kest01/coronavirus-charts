@@ -53,15 +53,21 @@ const parseArrayData = (country: string, data: Array<DataItem>): CountrySummary 
     }
 };
 
-const getActive = (item: VirusFields): number => item.confirmed - item.recovered - item.deaths
+export const getActive = (item: VirusFields): number => item.confirmed - item.recovered - item.deaths
 
 export const filterFavorite = (data: Array<CountrySummary>): Array<CountrySummary> =>
     data.filter(item => favoriteCountries.includes(item.country));
 
-export const getCountryChartData = (countryItems: Array<DataItem>, itemValue: (item: VirusFields) => number, threshold: number = 0): ChartData =>
-    countryItems
+export const getCountryChartData = (countryItems: Array<DataItem>, itemValue: (item: VirusFields, prev?: VirusFields) => number, threshold: number = 0): ChartData => {
+    let prevItem;
+    return countryItems
         .filter(item => item.confirmed > threshold)
-        .map(item => [Date.parse(item.date ? item.date : ''), itemValue(item)]);
+        .map(item => {
+            const result = [Date.parse(item.date ? item.date : ''), itemValue(item, prevItem)];
+            prevItem = item;
+            return result;
+        });
+};
 
 /*
 const parseArrayData = (data: Array<DataItem>): DataItem => data.reduce((acc: DataItem, item: DataItem): DataItem => {

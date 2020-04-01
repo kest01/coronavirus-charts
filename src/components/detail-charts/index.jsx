@@ -33,15 +33,21 @@ export class DetailCharts extends React.Component<Props, State> {
 
     render() {
         const totalCasesChartData = {
-            title: {
-                text: 'Total Cases'
-            },
-            xAxis: {
-                type: 'datetime',
-            },
+            title: { text: 'Total Cases' },
+            xAxis: { type: 'datetime' },
             series: [{
                 name: this.state.country,
                 data: proc.getCountryChartData(this.props.data[this.state.country], item => item.confirmed)
+            }]
+        };
+
+        const newCasesChartData = {
+            title: { text: 'Daily New Cases' },
+            xAxis: { type: 'datetime' },
+            series: [{
+                name: this.state.country,
+                data: proc.getCountryChartData(this.props.data[this.state.country], (item, prev) => item.confirmed - (prev ? prev.confirmed : 0)),
+                type: 'column',
             }]
         };
 
@@ -53,6 +59,10 @@ export class DetailCharts extends React.Component<Props, State> {
             <HighchartsReact
                 highcharts={ Highcharts }
                 options={ totalCasesChartData }
+            />
+            <HighchartsReact
+                highcharts={ Highcharts }
+                options={ newCasesChartData }
             />
         </div>;
     }
