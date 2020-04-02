@@ -23,6 +23,14 @@ type CountrySummary = {
 
 type ChartData = Array<Array<number>>
 
+export const filterEmptyRecords = (data: Data) => {
+    Object.keys(data).forEach(value => {
+        data[value] = data[value].filter(item => item.confirmed)
+    });
+
+    return data;
+};
+
 export const dataToGlobalViewByCountries = (data: Data) => {
     const result: Array<CountrySummary> = [];
     Object.keys(data).forEach(value => {

@@ -14,6 +14,7 @@ const mergeProps = (stateProps, dispatchProps) => {
     return {
         ...stateProps,
         ...dispatchProps,
+        data: processors.filterEmptyRecords(stateProps.data),
         countries: processors.dataToCountryList(stateProps.data),
         globalViewByCountries: processors.dataToGlobalViewByCountries(stateProps.data)
     }
