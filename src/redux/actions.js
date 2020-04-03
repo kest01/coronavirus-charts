@@ -6,6 +6,9 @@ export type Actions = {
     loadDataAction: () => void,
     changeActiveTab: (number) => void,
     openCountryDetailAction: (string) => void,
+    addCountryToComparisonAction: (string) => void,
+    removeCountryFromComparisonAction: (string) => void,
+    clearComparisonAction: () => void,
 }
 
 export const loadDataAction = () => (dispatch: any) => {
@@ -37,3 +40,24 @@ export const openCountryDetailAction = (country: string) => (dispatch: any) => {
         selectedCountry: country,
     });
 };
+
+export const addCountryToComparisonAction = (country: string) => (dispatch: any) => {
+    dispatch({
+        type: types.ADD_COUNTRY_TO_COMPARISON,
+        country,
+    });
+};
+
+export const removeCountryFromComparisonAction = (country: string) => (dispatch: any) => {
+    dispatch({
+        type: types.REMOVE_COUNTRY_FROM_COMPARISON,
+        country,
+    });
+};
+
+export const clearComparisonAction = () => (dispatch: any) => {
+    dispatch({
+        type: types.CLEAR_COMPARISON_LIST,
+    });
+};
+

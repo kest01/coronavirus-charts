@@ -1,6 +1,7 @@
 // @flow
 import React from 'react';
 import { useTable, useSortBy } from 'react-table'
+import AddToComparisonButton from '../comparison/add-button'
 import './index.scss'
 
 const columns = [
@@ -45,6 +46,7 @@ const columns = [
 type Props = {
     data: Array<any>,
     openCountryDetailAction: (string) => void,
+    addCountryToComparisonAction: (string) => void,
 };
 
 export default function Table(props: Props) {
@@ -96,7 +98,10 @@ export default function Table(props: Props) {
                                 {row.cells.map((cell, i) => {
                                     if (i === 0) {
                                         return (
-                                            <td {...cell.getCellProps()}><a href="#" onClick={() => props.openCountryDetailAction(cell.row.values.country)}>{cell.render('Cell')}</a></td>
+                                            <td {...cell.getCellProps()}>
+                                                <a href="#" onClick={() => props.openCountryDetailAction(cell.row.values.country)}>{cell.render('Cell')}</a>
+                                                <AddToComparisonButton onClick={() => props.addCountryToComparisonAction(cell.row.values.country)}/>
+                                            </td>
                                         )
                                     } else {
                                         return (
