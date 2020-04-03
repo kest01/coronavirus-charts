@@ -44,6 +44,7 @@ const columns = [
 
 type Props = {
     data: Array<any>,
+    openCountryDetailAction: (string) => void,
 };
 
 export default function Table(props: Props) {

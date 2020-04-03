@@ -2,8 +2,12 @@
 import * as types from './types';
 import * as processors from "../processing/processDataUtils";
 
+import type { CountrySummary } from "../processing/processDataUtils";
+
 export type AppStore = {
     data: any,
+    countries: Array<string>,
+    globalViewByCountries: Array<CountrySummary>,
     initialized: boolean,
     activeTab: number,
     selectedCountry: string,
@@ -11,6 +15,8 @@ export type AppStore = {
 
 const initialState: AppStore = {
     data: [],
+    countries: [],
+    globalViewByCountries: [],
     initialized: false,
     activeTab: 0,
     selectedCountry: 'Russia'

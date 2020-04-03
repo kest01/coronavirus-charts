@@ -1,3 +1,4 @@
+// @flow
 import React from 'react';
 import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
 import 'react-tabs/style/react-tabs.css';
@@ -5,7 +6,10 @@ import GlobalViewTable from '../global-view';
 import { DetailCharts } from '../detail-charts';
 import { filterFavorite } from '../../processing/processDataUtils'
 
-export default (props) => (
+import type { AppStore } from '../../redux/reducers'
+import type { Actions } from '../../redux/actions'
+
+export default (props: AppStore & Actions) => (
     <Tabs selectedIndex={props.activeTab} onSelect={tabIndex => props.changeActiveTab(tabIndex)}>
         <TabList>
             <Tab>Global view</Tab>

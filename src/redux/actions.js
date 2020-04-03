@@ -2,6 +2,11 @@
 import axios from 'axios';
 import * as types from './types';
 
+export type Actions = {
+    loadDataAction: () => void,
+    changeActiveTab: (number) => void,
+    openCountryDetailAction: (string) => void,
+}
 
 export const loadDataAction = () => (dispatch: any) => {
     axios.get('https://pomber.github.io/covid19/timeseries.json')

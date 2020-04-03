@@ -15,7 +15,7 @@ export type DataItem = VirusFields & {|
 
 export type Data = { [string]: Array<DataItem> }
 
-type CountrySummary = {
+export type CountrySummary = {
     country: string,
     total: VirusFields,
     last: VirusFields,
@@ -23,7 +23,7 @@ type CountrySummary = {
 
 type ChartData = Array<Array<number>>
 
-export const filterEmptyRecords = (data: Data) => {
+export const filterEmptyRecords = (data: Data): Data => {
     Object.keys(data).forEach(value => {
         data[value] = data[value].filter(item => item.confirmed)
     });
@@ -31,7 +31,7 @@ export const filterEmptyRecords = (data: Data) => {
     return data;
 };
 
-export const dataToGlobalViewByCountries = (data: Data) => {
+export const dataToGlobalViewByCountries = (data: Data): Array<CountrySummary> => {
     const result: Array<CountrySummary> = [];
     Object.keys(data).forEach(value => {
         result.push(parseArrayData(value, data[value]))
