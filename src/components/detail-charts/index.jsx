@@ -53,26 +53,25 @@ export class DetailCharts extends React.Component<Props, State> {
             {
                 title: { text: 'Total cases chart' },
                 xAxis: { type: 'datetime' },
+                chart: {
+                    type: 'column'
+                },
                 plotOptions: {
                     column: {
+                        stacking: 'normal',
                         pointWidth: 10,
                     }
                 },
                 series: [{
-                    name: 'Total',
-                    data: proc.getCountryChartData(this.props.data[this.state.country], item => item.confirmed),
-                    type: 'column',
+                    name: 'Active',
+                    data: proc.getCountryChartData(this.props.data[this.state.country], item => proc.getActive(item)),
                 }, {
                     name: 'Recovered',
                     data: proc.getCountryChartData(this.props.data[this.state.country], item => item.recovered),
-                    type: 'column',
-                    pointPlacement: -0.2,
                     color: 'green'
                 }, {
                     name: 'Deaths',
                     data: proc.getCountryChartData(this.props.data[this.state.country], item => item.deaths),
-                    type: 'column',
-                    pointPlacement: -0.4,
                     color: 'black'
                 }]
             },

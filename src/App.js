@@ -8,7 +8,6 @@ import './App.css';
 import type { AppStore } from './redux/reducers'
 import type { Actions } from './redux/actions'
 
-// TODO KK График со столбцами не содержит активные случаи
 // TODO KK Форматирование: ширина графиков
 // TODO KK Форматирование: Кнопки и ссылки
 
