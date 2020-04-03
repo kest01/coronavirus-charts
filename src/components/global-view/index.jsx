@@ -46,7 +46,7 @@ type Props = {
     data: Array<any>,
 };
 
-export default function Table({ data }: Props) {
+export default function Table(props: Props) {
     const {
         getTableProps,
         getTableBodyProps,
@@ -56,7 +56,7 @@ export default function Table({ data }: Props) {
     } = useTable(
         {
             columns,
-            data,
+            data: props.data,
             initialState: {
                 sortBy: [{ id: 'total.confirmed', desc: true }]
             }
@@ -88,15 +88,20 @@ export default function Table({ data }: Props) {
                 ))}
                 </thead>
                 <tbody {...getTableBodyProps()}>
-                {rows.map(
-                    (row, i) => {
+                {rows.map(row => {
                         prepareRow(row);
                         return (
                             <tr {...row.getRowProps()}>
-                                {row.cells.map(cell => {
-                                    return (
-                                        <td {...cell.getCellProps()}>{cell.render('Cell')}</td>
-                                    )
+                                {row.cells.map((cell, i) => {
+                                    if (i === 0) {
+                                        return (
+                                            <td {...cell.getCellProps()}><a href="#" onClick={() => props.openCountryDetailAction(cell.row.values.country)}>{cell.render('Cell')}</a></td>
+                                        )
+                                    } else {
+                                        return (
+                                            <td {...cell.getCellProps()}>{cell.render('Cell')}</td>
+                                        )
+                                    }
                                 })}
                             </tr>
                         )}

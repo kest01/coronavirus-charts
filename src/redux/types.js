@@ -1,3 +1,4 @@
 // @flow
 
 export const LOAD_DATA_REQUEST = 'LOAD_DATA_REQUEST';
+export const CHANGE_ACTIVE_TAB = 'CHANGE_ACTIVE_TAB';

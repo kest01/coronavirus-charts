@@ -6,17 +6,17 @@ const mapStateToProps = state => ({
     ...state
 });
 
+// TODO Import actions correctly
 const mapDispatchToProps = dispatch => ({
-    loadDataAction: () => dispatch(actions.loadDataAction())
+    loadDataAction: () => dispatch(actions.loadDataAction()),
+    changeActiveTab: (activeTab) => dispatch(actions.changeActiveTab(activeTab)),
+    openCountryDetailAction: (country) => dispatch(actions.openCountryDetailAction(country)),
 });
 
 const mergeProps = (stateProps, dispatchProps) => {
     return {
         ...stateProps,
         ...dispatchProps,
-        data: processors.filterEmptyRecords(stateProps.data),
-        countries: processors.dataToCountryList(stateProps.data),
-        globalViewByCountries: processors.dataToGlobalViewByCountries(stateProps.data)
     }
 };
 

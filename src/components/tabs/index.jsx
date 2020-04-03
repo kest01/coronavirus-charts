@@ -6,7 +6,7 @@ import { DetailCharts } from '../detail-charts';
 import { filterFavorite } from '../../processing/processDataUtils'
 
 export default (props) => (
-    <Tabs>
+    <Tabs selectedIndex={props.activeTab} onSelect={tabIndex => props.changeActiveTab(tabIndex)}>
         <TabList>
             <Tab>Global view</Tab>
             <Tab>Favorite countries</Tab>
@@ -14,13 +14,13 @@ export default (props) => (
         </TabList>
 
         <TabPanel>
-            <GlobalViewTable data={props.globalViewByCountries}/>
+            <GlobalViewTable data={props.globalViewByCountries} openCountryDetailAction={props.openCountryDetailAction}/>
         </TabPanel>
         <TabPanel>
-            <GlobalViewTable data={filterFavorite(props.globalViewByCountries)}/>
+            <GlobalViewTable data={filterFavorite(props.globalViewByCountries)} openCountryDetailAction={props.openCountryDetailAction}/>
         </TabPanel>
         <TabPanel>
-            <DetailCharts countries={props.countries} country={'Russia'} data={props.data} />
+            <DetailCharts countries={props.countries} country={props.selectedCountry} data={props.data} />
         </TabPanel>
     </Tabs>
 );

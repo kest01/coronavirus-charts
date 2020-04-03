@@ -17,3 +17,18 @@ export const loadDataAction = () => (dispatch: any) => {
             alert("Error on loading data")
         });
 };
+
+export const changeActiveTab = (activeTab: number) => (dispatch: any) => {
+    dispatch({
+        type: types.CHANGE_ACTIVE_TAB,
+        activeTab: activeTab,
+    });
+};
+
+export const openCountryDetailAction = (country: string) => (dispatch: any) => {
+    dispatch({
+        type: types.CHANGE_ACTIVE_TAB,
+        activeTab: 2,
+        selectedCountry: country,
+    });
+};

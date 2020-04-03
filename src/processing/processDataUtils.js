@@ -46,17 +46,25 @@ export const dataToCountryList = (data: Data): Array<string> => {
 
 const parseArrayData = (country: string, data: Array<DataItem>): CountrySummary => {
     const lastTwoDays = data.slice(-2);
+    let today: VirusFields, yesterday: VirusFields;
+    if (lastTwoDays.length === 2) {
+        today = lastTwoDays[1];
+        yesterday = lastTwoDays[0];
+    } else {
+        today = lastTwoDays[0];
+        yesterday = {confirmed: 0, recovered: 0, deaths: 0, active: 0}
+    }
     return {
         country,
         total: {
-            ...lastTwoDays[1],
-            active: getActive(lastTwoDays[1])
+            ...today,
+            active: getActive(today)
         },
         last: {
-            confirmed: lastTwoDays[1].confirmed - lastTwoDays[0].confirmed,
-            deaths: lastTwoDays[1].deaths - lastTwoDays[0].deaths,
-            recovered: lastTwoDays[1].recovered - lastTwoDays[0].recovered,
-            active: getActive(lastTwoDays[1]) - getActive(lastTwoDays[0])
+            confirmed: today.confirmed - yesterday.confirmed,
+            deaths: today.deaths - yesterday.deaths,
+            recovered: today.recovered - yesterday.recovered,
+            active: getActive(today) - getActive(yesterday),
         }
     }
 };

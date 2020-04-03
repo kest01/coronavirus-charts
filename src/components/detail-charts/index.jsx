@@ -104,13 +104,15 @@ export class DetailCharts extends React.Component<Props, State> {
             },
         ];
 
+        let key = 0;
+
         return <div>
             <Combobox items={this.props.countries}
                       selected={this.state.country}
                       onChange={this.handleChangeCountry}/>
             <br/>
             {chartOptions.map(options =>
-                <HighchartsReact
+                <HighchartsReact key={key++}
                     highcharts={ Highcharts }
                     options={ options }
                 />
