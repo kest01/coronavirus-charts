@@ -40,4 +40,22 @@ table {
             float: right;
         }
     }
+
+    .global-table-column {
+        font-weight: bold;
+    }
+
+    .global-table-column-2 {
+        background-color: #FFEEAA;
+    }
+
+    .global-table-column-4 {
+        background-color: red;
+        color: white;
+    }
+
+    .global-table-column-6 {
+        background-color: #00CD00;
+        color: white;
+    }
 }

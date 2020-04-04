@@ -60,9 +60,9 @@ export class CountryComparison extends React.Component<Props> {
                 }).toArray()
             },
         ];
-        console.log(chartOptions);
+
         if (this.props.countries.isEmpty()) {
-            return <h3>!!!Please select countries for comparison on another tabs</h3>
+            return <h3>Please select countries for comparison on another tabs</h3>
         } else{
             return <div className="chart_container">
                 {this.props.countries.map(country =>

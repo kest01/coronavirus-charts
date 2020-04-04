@@ -7,6 +7,26 @@ import './index.scss'
 
 import type {CountrySummary} from "../../processing/processDataUtils";
 
+
+const formatDailyInc = (numberString) => {
+    const number = parseInt(numberString);
+    if (isNaN(number)) {
+        return numberString;
+    }
+    if (number < 0) return number.toLocaleString('USD');
+    else if (number === 0) return '';
+    else return '+' + number.toLocaleString('USD');
+};
+
+const formatNumber = (numberString) => {
+    const number = parseInt(numberString);
+    if (isNaN(number)) {
+        return numberString;
+    }
+    return number.toLocaleString('USD');
+};
+
+
 const columns = [
         {
             Header: 'Country',
@@ -15,34 +35,42 @@ const columns = [
         {
             Header: 'Total cases',
             accessor: 'total.confirmed',
+            Cell: ({ cell }) => formatNumber(cell.value)
         },
         {
             Header: 'New cases',
             accessor: 'last.confirmed',
+            Cell: ({ cell }) => formatDailyInc(cell.value)
         },
         {
             Header: 'Total deaths',
             accessor: 'total.deaths',
+            Cell: ({ cell }) => formatNumber(cell.value)
         },
         {
             Header: 'Last deaths',
             accessor: 'last.deaths',
+            Cell: ({ cell }) => formatDailyInc(cell.value)
         },
         {
             Header: 'Total recovered',
             accessor: 'total.recovered',
+            Cell: ({ cell }) => formatNumber(cell.value)
         },
         {
             Header: 'Last recovered',
             accessor: 'last.recovered',
+            Cell: ({ cell }) => formatDailyInc(cell.value)
         },
         {
             Header: 'Total active',
             accessor: 'total.active',
+            Cell: ({ cell }) => formatNumber(cell.value)
         },
         {
             Header: 'Active change',
             accessor: 'last.active',
+            Cell: ({ cell }) => formatDailyInc(cell.value)
         },
     ];
 
@@ -108,7 +136,9 @@ export default function Table(props: Props) {
                                         )
                                     } else {
                                         return (
-                                            <td {...cell.getCellProps()}>{cell.render('Cell')}</td>
+                                            <td className={`global-table-column ${cell.value === 0 ? '' : 'global-table-column-' + i}`} {...cell.getCellProps()}>
+                                                {cell.render('Cell')}
+                                            </td>
                                         )
                                     }
                                 })}
