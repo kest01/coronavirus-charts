@@ -1,5 +1,6 @@
 // @flow
 import React from 'react';
+import { List } from 'immutable';
 import Highcharts from 'highcharts';
 import HighchartsReact from 'highcharts-react-official';
 import { Combobox } from '../combobox';
@@ -9,7 +10,7 @@ import type { Data } from '../../processing/processDataUtils.js';
 
 type Props = {
     data: Data,
-    countries: Array<string>,
+    countries: List<string>,
     country: string
 }
 

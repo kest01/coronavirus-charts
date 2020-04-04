@@ -1,8 +1,11 @@
 // @flow
 import React from 'react';
 import { useTable, useSortBy } from 'react-table'
+import { List } from 'immutable';
 import AddToComparisonButton from '../comparison/add-button'
 import './index.scss'
+
+import type {CountrySummary} from "../../processing/processDataUtils";
 
 const columns = [
         {
@@ -44,7 +47,7 @@ const columns = [
     ];
 
 type Props = {
-    data: Array<any>,
+    data: List<CountrySummary>,
     openCountryDetailAction: (string) => void,
     addCountryToComparisonAction: (string) => void,
 };

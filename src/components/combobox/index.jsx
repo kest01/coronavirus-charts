@@ -1,9 +1,9 @@
 // @flow
 import React from 'react';
-// import './index.scss'
+import { List } from 'immutable';
 
 type Props = {
-    items: Array<string>,
+    items: List<string>,
     selected?: string,
     onChange: (value: string) => void
 }

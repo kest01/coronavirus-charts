@@ -1,4 +1,5 @@
 // @flow
+import { List } from 'immutable';
 
 const favoriteCountries = ['Russia', 'Ukraine', 'Belarus', 'US', 'Italy', 'Israel', 'China', 'Spain', 'Germany'];
 
@@ -31,17 +32,17 @@ export const filterEmptyRecords = (data: Data): Data => {
     return data;
 };
 
-export const dataToGlobalViewByCountries = (data: Data): Array<CountrySummary> => {
+export const dataToGlobalViewByCountries = (data: Data): List<CountrySummary> => {
     const result: Array<CountrySummary> = [];
     Object.keys(data).forEach(value => {
         result.push(parseArrayData(value, data[value]))
     });
 
-    return result
+    return List(result);
 };
 
-export const dataToCountryList = (data: Data): Array<string> => {
-    return Object.entries(data).map(( [k] ) => k);
+export const dataToCountryList = (data: Data): List<string> => {
+    return List(Object.entries(data).map(( [k] ) => k));
 };
 
 const parseArrayData = (country: string, data: Array<DataItem>): CountrySummary => {
@@ -71,7 +72,7 @@ const parseArrayData = (country: string, data: Array<DataItem>): CountrySummary 
 
 export const getActive = (item: VirusFields): number => item.confirmed - item.recovered - item.deaths;
 
-export const filterFavorite = (data: Array<CountrySummary>): Array<CountrySummary> =>
+export const filterFavorite = (data: List<CountrySummary>): List<CountrySummary> =>
     data.filter(item => favoriteCountries.includes(item.country));
 
 export const getCountryChartData = (countryItems: Array<DataItem>, itemValue: (item: VirusFields, prev?: VirusFields) => number, threshold: number = 0): ChartData => {

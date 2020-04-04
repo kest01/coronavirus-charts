@@ -1,30 +1,31 @@
 // @flow
+import { List } from 'immutable';
 import * as types from './types';
 import * as processors from "../processing/processDataUtils";
 
-import type { CountrySummary } from "../processing/processDataUtils";
+import type { Data, CountrySummary } from "../processing/processDataUtils";
 
 export type AppStore = {
-    data: any,
-    countries: Array<string>,
-    globalViewByCountries: Array<CountrySummary>,
+    data: Data,
+    countries: List<string>,
+    globalViewByCountries: List<CountrySummary>,
     initialized: boolean,
     activeTab: number,
     selectedCountry: string,
-    comparisonCountries: Array<string>,
+    comparisonCountries: List<string>,
 }
 
 const initialState: AppStore = {
-    data: [],
-    countries: [],
-    globalViewByCountries: [],
+    data: List(),
+    countries: List(),
+    globalViewByCountries: List(),
     initialized: false,
     activeTab: 0,
     selectedCountry: 'Russia',
-    comparisonCountries: [],
+    comparisonCountries: List(),
 };
 
-export default (state: AppStore = initialState, action: any) => {
+export default (state: AppStore = initialState, action: any): AppStore => {
     switch (action.type) {
         case types.LOAD_DATA_REQUEST:
             return {
@@ -43,17 +44,19 @@ export default (state: AppStore = initialState, action: any) => {
         case types.ADD_COUNTRY_TO_COMPARISON:
             return {
                 ...state,
-                comparisonCountries: [...state.comparisonCountries, action.country],
+                comparisonCountries: state.comparisonCountries.includes(action.country)
+                    ? state.comparisonCountries
+                    : state.comparisonCountries.push(action.country),
             };
         case types.REMOVE_COUNTRY_FROM_COMPARISON:
             return {
                 ...state,
-                comparisonCountries: [...state.comparisonCountries.filter(value => value !== action.country)],
+                comparisonCountries: state.comparisonCountries.filter(value => value !== action.country),
             };
         case types.CLEAR_COMPARISON_LIST:
             return {
                 ...state,
-                comparisonCountries: [],
+                comparisonCountries: List(),
             };
         default:
             return state

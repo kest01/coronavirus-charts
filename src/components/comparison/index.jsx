@@ -2,6 +2,7 @@
 import React from 'react';
 import Highcharts from 'highcharts';
 import HighchartsReact from 'highcharts-react-official';
+import { List } from 'immutable';
 import * as proc from '../../processing/processDataUtils.js'
 
 import type { Data } from '../../processing/processDataUtils.js'
@@ -9,7 +10,7 @@ import type { Data } from '../../processing/processDataUtils.js'
 
 type Props = {
     data: Data,
-    countries: Array<string>,
+    countries: List<string>,
     removeCountryFromComparisonAction: (string) => void,
 }
 
@@ -30,7 +31,7 @@ export class CountryComparison extends React.Component<Props> {
                         name: country,
                         data: proc.getChartDataRelative(this.props.data[country], item => item.confirmed, 100)
                     }
-                })
+                }).toArray()
             },
             {
                 title: { text: 'Daily Cases (after reaching 100 cases)' },
@@ -43,7 +44,7 @@ export class CountryComparison extends React.Component<Props> {
                         name: country,
                         data: proc.getChartDataRelative(this.props.data[country], (item, prev) => item.confirmed - (prev ? prev.confirmed : 0), 100)
                     }
-                })
+                }).toArray()
             },
             {
                 title: { text: 'Daily Deaths (after reaching 100 cases)' },
@@ -56,11 +57,13 @@ export class CountryComparison extends React.Component<Props> {
                         name: country,
                         data: proc.getChartDataRelative(this.props.data[country], (item, prev) => item.deaths - (prev ? prev.deaths : 0), 100)
                     }
-                })
+                }).toArray()
             },
         ];
-
-        if (this.props.countries.length > 0) {
+        console.log(chartOptions);
+        if (this.props.countries.isEmpty()) {
+            return <h3>!!!Please select countries for comparison on another tabs</h3>
+        } else{
             return <div className="chart_container">
                 {this.props.countries.map(country =>
                     <div key={key++}>
@@ -82,8 +85,6 @@ export class CountryComparison extends React.Component<Props> {
                     />
                 )}
             </div>;
-        } else {
-            return <h3>Please select countries for comparison on another tabs</h3>
         }
     }
 
