@@ -99,7 +99,7 @@ export default function Table(props: Props) {
                                     if (i === 0) {
                                         return (
                                             <td {...cell.getCellProps()}>
-                                                <a href="#" onClick={() => props.openCountryDetailAction(cell.row.values.country)}>{cell.render('Cell')}</a>
+                                                <button onClick={() => props.openCountryDetailAction(cell.row.values.country)}>{cell.render('Cell')}</button>
                                                 <AddToComparisonButton onClick={() => props.addCountryToComparisonAction(cell.row.values.country)}/>
                                             </td>
                                         )

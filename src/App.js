@@ -9,7 +9,7 @@ import type { AppStore } from './redux/reducers'
 import type { Actions } from './redux/actions'
 
 // TODO KK Форматирование: ширина графиков
-// TODO KK Форматирование: Кнопки и ссылки
+// TODO KK Починить добавление стран несколько раз
 
 class App extends React.Component<Actions & AppStore> {
 
