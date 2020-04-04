@@ -1,0 +1,19 @@
+language: node_js
+node_js:
+  - '11'
+
+script:
+  - npm run flow check
+  - npm run test
+  - npm run build
+
+deploy:
+  provider: pages
+  github_token: $GITHUB_TOKEN
+  skip-cleanup: true
+  keep-history: true
+  local-dir: build
+  repo: kest01/coronavirus-charts-build
+  target-branch: master
+  on:
+    branch: master

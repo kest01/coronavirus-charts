@@ -8,11 +8,9 @@ import './App.css';
 import type { AppStore } from './redux/reducers'
 import type { Actions } from './redux/actions'
 
-// TODO KK Memorize
+// TODO KK Добавить описание и плашки Travis CI
+// TODO KK Tests with coverage
 // TODO KK Back button support
-// TODO KK Хостинг на github
-// TODO KK Travis CI
-// TODO Tests with coverage
 
 class App extends React.Component<Actions & AppStore> {
 
