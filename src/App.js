@@ -8,8 +8,11 @@ import './App.css';
 import type { AppStore } from './redux/reducers'
 import type { Actions } from './redux/actions'
 
-// TODO KK Форматирование: ширина графиков
-// TODO KK Починить добавление стран несколько раз
+// TODO KK Починить добавление стран несколько раз: Immutable.js
+// TODO KK Форматирование таблицы
+// TODO KK Хостинг на github
+// TODO KK Travis CI
+// TODO Tests with coverage
 
 class App extends React.Component<Actions & AppStore> {
 

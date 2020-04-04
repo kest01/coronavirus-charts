@@ -61,7 +61,7 @@ export class CountryComparison extends React.Component<Props> {
         ];
 
         if (this.props.countries.length > 0) {
-            return <div>
+            return <div className="chart_container">
                 {this.props.countries.map(country =>
                     <div key={key++}>
                         <span>{country}</span>

@@ -2,10 +2,10 @@
 import React from 'react';
 import Highcharts from 'highcharts';
 import HighchartsReact from 'highcharts-react-official';
-import { Combobox } from '../combobox'
-import * as proc from '../../processing/processDataUtils.js'
+import { Combobox } from '../combobox';
+import * as proc from '../../processing/processDataUtils.js';
 
-import type { Data } from '../../processing/processDataUtils.js'
+import type { Data } from '../../processing/processDataUtils.js';
 
 type Props = {
     data: Data,
@@ -105,7 +105,7 @@ export class DetailCharts extends React.Component<Props, State> {
 
         let key = 0;
 
-        return <div>
+        return <div className="chart_container">
             <Combobox items={this.props.countries}
                       selected={this.state.country}
                       onChange={this.handleChangeCountry}/>
