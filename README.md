@@ -1,4 +1,5 @@
 [![Build Status](https://travis-ci.com/kest01/coronavirus-charts.svg?branch=master)](https://travis-ci.com/kest01/coronavirus-charts)
+[![codecov](https://codecov.io/gh/kest01/coronavirus-charts/branch/master/graph/badge.svg)](https://codecov.io/gh/kest01/coronavirus-charts)
 
 ## Coronavirus statistic charts
 
