@@ -81,7 +81,7 @@ it('Check getCountryChartData()', () => {
         }],
         item => item.confirmed
     );
-    expect(result).toEqual([[1579640400000, 10], [1579726800000, 15]]);
+    expect(result).toEqual([[1579651200000, 10], [1579737600000, 15]]);
 });
 
 it('Check getChartDataRelative()', () => {

@@ -24,6 +24,8 @@ export type CountrySummary = {
 
 type ChartData = Array<Array<number>>
 
+const timezoneOffset = new Date().getTimezoneOffset() * 60000;
+
 export const filterEmptyRecords = (data: Data): Data => {
     Object.keys(data).forEach(value => {
         data[value] = data[value].filter(item => item.confirmed)
@@ -80,7 +82,7 @@ export const getCountryChartData = (countryItems: Array<DataItem>, itemValue: (i
     return countryItems
         .filter(item => item.confirmed > threshold)
         .map(item => {
-            const result = [Date.parse(item.date ? item.date : ''), itemValue(item, prevItem)];
+            const result = [Date.parse(item.date ? item.date : '') - timezoneOffset, itemValue(item, prevItem)];
             prevItem = item;
             return result;
         });
