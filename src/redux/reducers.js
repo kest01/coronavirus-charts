@@ -53,11 +53,6 @@ export default (state: AppStore = initialState, action: any): AppStore => {
                 ...state,
                 comparisonCountries: state.comparisonCountries.filter(value => value !== action.country),
             };
-        case types.CLEAR_COMPARISON_LIST:
-            return {
-                ...state,
-                comparisonCountries: List(),
-            };
         default:
             return state
     }

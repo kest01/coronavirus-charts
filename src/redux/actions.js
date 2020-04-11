@@ -55,9 +55,3 @@ export const removeCountryFromComparisonAction = (country: string) => (dispatch:
     });
 };
 
-export const clearComparisonAction = () => (dispatch: any) => {
-    dispatch({
-        type: types.CLEAR_COMPARISON_LIST,
-    });
-};
-

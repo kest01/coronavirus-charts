@@ -67,8 +67,8 @@ export class CountryComparison extends React.Component<Props> {
             return <div className="chart_container">
                 {this.props.countries.map(country =>
                     <div key={key++}>
-                        <span>{country}</span>
-                        <button title='Remove country' onClick={() => this.props.removeCountryFromComparisonAction(country)}>
+                        <span className={"comparison-county-label"}>{country}</span>
+                        <button title='Remove country' className={"remove-county-button"} onClick={() => this.props.removeCountryFromComparisonAction(country)}>
                             <svg width="8" height="10" version="1.1"
                                  xmlns="http://www.w3.org/2000/svg">
                                 <line x1="1" y1="7" x2="7" y2="1" stroke="red" strokeWidth="1"/>
