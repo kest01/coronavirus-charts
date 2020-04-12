@@ -1,7 +1,8 @@
 import React from 'react';
 import App from '../../../App';
 import { List } from 'immutable';
-import { createMockStoreFactory, mountConnectedComponent, snapshotify } from '../../utils/test-utils'
+import { makeStore, mountConnectedComponent } from '../../utils/test-utils'
+import { resetIdCounter } from 'react-tabs';
 
 describe('Test Tabs',()=>{
     const initialState = {
@@ -20,17 +21,15 @@ describe('Test Tabs',()=>{
         },
         globalViewByCountries: List(),
         countries: List(['Russia']),
+        activeTab: 0,
         selectedCountry: 'Russia',
         comparisonCountries: List(),
     };
-    const mockStoreFactory = createMockStoreFactory();
     let store, wrapper;
 
-    beforeEach(()=>{
-    });
-
     it('Check first tab selected on loading', () => {
-        store = mockStoreFactory(initialState);
+        resetIdCounter();
+        store = makeStore(initialState);
         wrapper = mountConnectedComponent(App, store);
 
         expect(wrapper.find('.react-tabs__tab-list').find('#react-tabs-0 .react-tabs__tab--selected')).toHaveLength(1);
