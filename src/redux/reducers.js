@@ -11,6 +11,7 @@ export type AppStore = {
     globalViewByCountries: List<CountrySummary>,
     initialized: boolean,
     activeTab: number,
+    chartThreshold: number,
     selectedCountry: string,
     comparisonCountries: List<string>,
 }
@@ -21,6 +22,7 @@ const initialState: AppStore = {
     globalViewByCountries: List(),
     initialized: false,
     activeTab: 0,
+    chartThreshold: 100,
     selectedCountry: 'Russia',
     comparisonCountries: List(),
 };
@@ -52,6 +54,11 @@ export default (state: AppStore = initialState, action: any): AppStore => {
             return {
                 ...state,
                 comparisonCountries: state.comparisonCountries.filter(value => value !== action.country),
+            };
+        case types.UPDATE_CHART_THRESHOLD:
+            return {
+                ...state,
+                chartThreshold: action.newThreshold,
             };
         default:
             return state

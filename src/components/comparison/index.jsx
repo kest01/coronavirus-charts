@@ -12,50 +12,82 @@ type Props = {
     data: Data,
     countries: List<string>,
     removeCountryFromComparisonAction: (string) => void,
+    updateChartThresholdAction: (number) => void,
+    chartThreshold: number,
 }
 
 export class CountryComparison extends React.Component<Props> {
+
+    updateChartThreshold = (event: any) => {
+        const newThreshold = parseFloat(event.target.value);
+        if (!isNaN(newThreshold)) {
+            this.props.updateChartThresholdAction(newThreshold)
+        }
+    };
 
     render() {
         let key = 0;
 
         const chartOptions = [
             {
-                title: { text: 'Total Cases (after reaching 100 cases)' },
+                title: { text: `Total Cases (after reaching ${this.props.chartThreshold} cases)` },
                 xAxis: {
-                    title: { text: 'Days after reaching 100 cases' },
+                    title: { text: `Days after reaching ${this.props.chartThreshold} cases` },
                     tickInterval: 5
                 },
                 series: this.props.countries.map(country => {
                     return {
                         name: country,
-                        data: proc.getChartDataRelative(this.props.data[country], item => item.confirmed, 100)
+                        data: proc.getChartDataRelative(this.props.data[country], item => item.confirmed, this.props.chartThreshold)
                     }
                 }).toArray()
             },
             {
-                title: { text: 'Daily Cases (after reaching 100 cases)' },
+                title: { text: `Daily Cases (after reaching ${this.props.chartThreshold} cases)` },
                 xAxis: {
-                    title: { text: 'Days after reaching 100 cases' },
+                    title: { text: `Days after reaching ${this.props.chartThreshold} cases` },
                     tickInterval: 5
                 },
                 series: this.props.countries.map(country => {
                     return {
                         name: country,
-                        data: proc.getChartDataRelative(this.props.data[country], (item, prev) => item.confirmed - (prev ? prev.confirmed : 0), 100)
+                        data: proc.getChartDataRelative(
+                            this.props.data[country],
+                            (item, prev) => item.confirmed - (prev ? prev.confirmed : 0),
+                            this.props.chartThreshold
+                        )
                     }
                 }).toArray()
             },
             {
-                title: { text: 'Daily Deaths (after reaching 100 cases)' },
+                title: { text: `Active Cases (after reaching ${this.props.chartThreshold} cases)` },
                 xAxis: {
-                    title: { text: 'Days after reaching 100 cases' },
+                    title: { text: `Days after reaching ${this.props.chartThreshold} cases` },
                     tickInterval: 5
                 },
                 series: this.props.countries.map(country => {
                     return {
                         name: country,
-                        data: proc.getChartDataRelative(this.props.data[country], (item, prev) => item.deaths - (prev ? prev.deaths : 0), 100)
+                        data: proc.getChartDataRelative(
+                            this.props.data[country],
+                            item => proc.getActive(item),
+                            this.props.chartThreshold)
+                    }
+                }).toArray()
+            },
+            {
+                title: { text: `Daily Deaths (after reaching ${this.props.chartThreshold} cases)` },
+                xAxis: {
+                    title: { text: `Days after reaching ${this.props.chartThreshold} cases` },
+                    tickInterval: 5
+                },
+                series: this.props.countries.map(country => {
+                    return {
+                        name: country,
+                        data: proc.getChartDataRelative(
+                            this.props.data[country],
+                            (item, prev) => item.deaths - (prev ? prev.deaths : 0),
+                            this.props.chartThreshold)
                     }
                 }).toArray()
             },
@@ -77,6 +109,12 @@ export class CountryComparison extends React.Component<Props> {
                         </button>
                     </div>
                 )}
+                <br/>
+                <span>Zero point</span>
+                <input className={'chart-threshold-input'}
+                       defaultValue={this.props.chartThreshold}
+                       onChange={this.updateChartThreshold}/>
+                <span>cases</span>
                 <br/>
                 {chartOptions.map(options =>
                     <HighchartsReact key={key++}

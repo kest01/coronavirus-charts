@@ -33,7 +33,12 @@ export default (props: AppStore & Actions) => (
             <DetailCharts countries={props.countries} country={props.selectedCountry} data={props.data} />
         </TabPanel>
         <TabPanel>
-            <CountryComparison countries={props.comparisonCountries} data={props.data} removeCountryFromComparisonAction={props.removeCountryFromComparisonAction}/>
+            <CountryComparison countries={props.comparisonCountries}
+                               data={props.data}
+                               removeCountryFromComparisonAction={props.removeCountryFromComparisonAction}
+                               chartThreshold={props.chartThreshold}
+                               updateChartThresholdAction={props.updateChartThresholdAction}
+            />
         </TabPanel>
     </Tabs>
 );

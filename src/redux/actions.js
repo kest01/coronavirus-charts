@@ -8,7 +8,7 @@ export type Actions = {
     openCountryDetailAction: (string) => void,
     addCountryToComparisonAction: (string) => void,
     removeCountryFromComparisonAction: (string) => void,
-    clearComparisonAction: () => void,
+    updateChartThresholdAction: (number) => void,
 }
 
 export const loadDataAction = () => (dispatch: any) => {
@@ -55,3 +55,9 @@ export const removeCountryFromComparisonAction = (country: string) => (dispatch:
     });
 };
 
+export const updateChartThresholdAction = (newThreshold: number) => (dispatch: any) => {
+    dispatch({
+        type: types.UPDATE_CHART_THRESHOLD,
+        newThreshold,
+    });
+};
