@@ -4,7 +4,7 @@ node_js:
 
 script:
   - npm run flow check
-  - npm run test -- --coverage --no-cache
+  - npm run test -- --coverage --clear-cache
   - npm run codecov
   - npm run build
 
