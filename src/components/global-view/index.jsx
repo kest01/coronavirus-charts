@@ -13,9 +13,9 @@ const formatDailyInc = (numberString) => {
     if (isNaN(number)) {
         return numberString;
     }
-    if (number < 0) return number.toLocaleString('USD');
+    if (number < 0) return number.toLocaleString('ru-RU');
     else if (number === 0) return '';
-    else return '+' + number.toLocaleString('USD');
+    else return '+' + number.toLocaleString('ru-RU');
 };
 
 const formatNumber = (numberString) => {
@@ -23,7 +23,7 @@ const formatNumber = (numberString) => {
     if (isNaN(number)) {
         return numberString;
     }
-    return number.toLocaleString('USD');
+    return number.toLocaleString('ru-RU');
 };
 
 
