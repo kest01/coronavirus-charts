@@ -76,6 +76,22 @@ export class CountryComparison extends React.Component<Props> {
                 }).toArray()
             },
             {
+                title: { text: `Total Deaths (after reaching ${this.props.chartThreshold} cases)` },
+                xAxis: {
+                    title: { text: `Days after reaching ${this.props.chartThreshold} cases` },
+                    tickInterval: 5
+                },
+                series: this.props.countries.map(country => {
+                    return {
+                        name: country,
+                        data: proc.getChartDataRelative(
+                            this.props.data[country],
+                            item => item.deaths,
+                            this.props.chartThreshold)
+                    }
+                }).toArray()
+            },
+            {
                 title: { text: `Daily Deaths (after reaching ${this.props.chartThreshold} cases)` },
                 xAxis: {
                     title: { text: `Days after reaching ${this.props.chartThreshold} cases` },
