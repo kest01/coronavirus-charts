@@ -1,5 +1,6 @@
 // @flow
 import { List } from 'immutable';
+import queryString from 'query-string';
 import * as types from './types';
 import * as processors from "../processing/processDataUtils";
 
@@ -16,7 +17,7 @@ export type AppStore = {
     comparisonCountries: List<string>,
 }
 
-const initialState: AppStore = {
+export const initialState: AppStore = {
     data: List(),
     countries: List(),
     globalViewByCountries: List(),
@@ -37,11 +38,13 @@ export default (state: AppStore = initialState, action: any): AppStore => {
                 globalViewByCountries: processors.dataToGlobalViewByCountries(action.data),
                 initialized: true
             };
-        case types.CHANGE_ACTIVE_TAB:
+        case types.LOCATION_CHANGE:
+            const newTab = pathToTabIndex(action.payload.location.pathname);
+            const newCountry = newTab === 2 ? queryString.parse(action.payload.location.search).country : undefined;
             return {
                 ...state,
-                activeTab: action.activeTab,
-                selectedCountry: action.selectedCountry ? action.selectedCountry : state.selectedCountry,
+                activeTab: pathToTabIndex(action.payload.location.pathname),
+                selectedCountry: newCountry ? newCountry : state.selectedCountry,
             };
         case types.ADD_COUNTRY_TO_COMPARISON:
             return {
@@ -64,3 +67,13 @@ export default (state: AppStore = initialState, action: any): AppStore => {
             return state
     }
 }
+
+const pathToTabIndex = (path: string): number => {
+    switch (path) {
+        case '/': return 0;
+        case '/favorite': return 1;
+        case '/details': return 2;
+        case '/comparison': return 3;
+        default: return 0;
+    }
+};

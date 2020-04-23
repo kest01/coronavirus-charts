@@ -26,14 +26,14 @@ describe('Render and test App component',()=>{
     wrapper.update();
     expect(snapshotify(wrapper)).toMatchSnapshot();
 
-    wrapper.find('#react-tabs-2').at(0).simulate('click');
+    wrapper.find('#tab-link-1').at(0).simulate('click', { button: 0 });
     wrapper.update();
     expect(snapshotify(wrapper)).toMatchSnapshot();
   });
 
   it('Open country link', () => {
     wrapper.update();
-    wrapper.find('.open-country-button').at(0).simulate('click');
+    wrapper.find('.open-country-button').at(0).simulate('click', { button: 0 });
     wrapper.update();
 
     expect(wrapper.find('.react-tabs__tab-list').find('#react-tabs-4 .react-tabs__tab--selected')).toHaveLength(1);
@@ -41,9 +41,11 @@ describe('Render and test App component',()=>{
 
   it('Open comparison tab AND remove country', () => {
     wrapper.update();
+    wrapper.find('#tab-link-0').at(0).simulate('click', { button: 0 });
+    wrapper.update();
     wrapper.find('.add-button').at(0).simulate('click');
     wrapper.find('.add-button').at(1).simulate('click');
-    wrapper.find('#react-tabs-6').at(0).simulate('click');
+    wrapper.find('#tab-link-3').at(0).simulate('click', { button: 0 });
     wrapper.update();
 
     expect(wrapper.find('.react-tabs__tab-list').find('#react-tabs-6 .react-tabs__tab--selected')).toHaveLength(1);

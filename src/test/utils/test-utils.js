@@ -1,19 +1,14 @@
 import React from "react";
 import { Provider } from 'react-redux'
-import { createStore, applyMiddleware, compose } from 'redux';
+import { ConnectedRouter } from 'connected-react-router'
 import { mount } from 'enzyme';
-import thunk from 'redux-thunk';
-import rootReducer from "../../redux/reducers";
+import { configureStore, history } from "../../redux/store";
 import fs from 'fs';
 
 
-const middlewares = compose(applyMiddleware(thunk));
+export const makeStore = (initialState) => configureStore(initialState);
 
-export const createStoreWithMiddleWare = compose(middlewares)(createStore);
-
-export const makeStore = (initialState) => createStoreWithMiddleWare(rootReducer, initialState);
-
-export const mountConnectedComponent = (Component, store) => mount( <Provider store={store}><Component /></Provider> );
+export const mountConnectedComponent = (Component, store) => mount( <Provider store={store}><ConnectedRouter history={history}><Component /></ConnectedRouter></Provider> );
 
 export const snapshotify = reactWrapper => reactWrapper.html();
 

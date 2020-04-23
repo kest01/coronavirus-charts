@@ -17,7 +17,7 @@ class App extends React.Component<Actions & AppStore> {
     }
 
     render() {
-        if (!this.props.initialized) {
+        if (!this.props.store.initialized) {
             return <Preloader/>
         } else {
             return (

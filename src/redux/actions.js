@@ -4,8 +4,6 @@ import * as types from './types';
 
 export type Actions = {
     loadDataAction: () => void,
-    changeActiveTab: (number) => void,
-    openCountryDetailAction: (string) => void,
     addCountryToComparisonAction: (string) => void,
     removeCountryFromComparisonAction: (string) => void,
     updateChartThresholdAction: (number) => void,
@@ -24,21 +22,6 @@ export const loadDataAction = () => (dispatch: any) => {
             console.log(error);
             alert("Error on loading data")
         });
-};
-
-export const changeActiveTab = (activeTab: number) => (dispatch: any) => {
-    dispatch({
-        type: types.CHANGE_ACTIVE_TAB,
-        activeTab: activeTab,
-    });
-};
-
-export const openCountryDetailAction = (country: string) => (dispatch: any) => {
-    dispatch({
-        type: types.CHANGE_ACTIVE_TAB,
-        activeTab: 2,
-        selectedCountry: country,
-    });
 };
 
 export const addCountryToComparisonAction = (country: string) => (dispatch: any) => {

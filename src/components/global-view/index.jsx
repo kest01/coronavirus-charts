@@ -1,6 +1,7 @@
 // @flow
 import React from 'react';
 import { useTable, useSortBy } from 'react-table'
+import { Link } from 'react-router-dom'
 import { List } from 'immutable';
 import AddToComparisonButton from '../comparison/add-button'
 import './index.scss'
@@ -76,7 +77,6 @@ const columns = [
 
 type Props = {
     data: List<CountrySummary>,
-    openCountryDetailAction: (string) => void,
     addCountryToComparisonAction: (string) => void,
 };
 
@@ -130,7 +130,7 @@ export default function Table(props: Props) {
                                     if (i === 0) {
                                         return (
                                             <td {...cell.getCellProps()}>
-                                                <button className={'open-country-button'} onClick={() => props.openCountryDetailAction(cell.row.values.country)}>{cell.render('Cell')}</button>
+                                                <Link className={'open-country-button'} to={`/details?country=${cell.row.values.country}`}>{cell.render('Cell')}</Link>
                                                 <AddToComparisonButton onClick={() => props.addCountryToComparisonAction(cell.row.values.country)}/>
                                             </td>
                                         )
