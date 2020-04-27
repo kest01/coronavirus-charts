@@ -107,6 +107,22 @@ export class CountryComparison extends React.Component<Props> {
                     }
                 }).toArray()
             },
+            {
+                title: { text: `Daily Recovers (after reaching ${this.props.chartThreshold} cases)` },
+                xAxis: {
+                    title: { text: `Days after reaching ${this.props.chartThreshold} cases` },
+                    tickInterval: 5
+                },
+                series: this.props.countries.map(country => {
+                    return {
+                        name: country,
+                        data: proc.getChartDataRelative(
+                            this.props.data[country],
+                            (item, prev) => item.recovered - (prev ? prev.recovered : 0),
+                            this.props.chartThreshold)
+                    }
+                }).toArray()
+            },
         ];
 
         if (this.props.countries.isEmpty()) {

@@ -85,7 +85,30 @@ export class DetailCharts extends React.Component<Props, State> {
                 }]
             },
             {
-                title: { text: 'Dayly Cases vs Daily Deaths' },
+                title: { text: 'Daily Cases vs Daily Recovered' },
+                xAxis: {
+                    type: 'datetime',
+                    crosshair: true
+                },
+                yAxis: [{
+                    title: { text: 'Cases', }
+                }, {
+                    title: { text: 'deaths', },
+                    opposite: true
+                }],
+                series: [{
+                    name: 'Recovered',
+                    data: proc.getCountryChartData(this.props.data[this.state.country], (item, prev) => item.recovered - (prev ? prev.recovered : 0)),
+                    type: 'column',
+                    color: 'black',
+                    yAxis: 1,
+                }, {
+                    name: 'New Cases',
+                    data: proc.getCountryChartData(this.props.data[this.state.country], (item, prev) => item.confirmed - (prev ? prev.confirmed : 0)),
+                }]
+            },
+            {
+                title: { text: 'Daily Cases vs Daily Deaths' },
                 xAxis: {
                     type: 'datetime',
                     crosshair: true
