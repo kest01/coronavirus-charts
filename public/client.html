@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+    <style>
+        #chatFrameContainer {
+            position: fixed;
+            z-index: 5000;
+            display: block;
+            visibility: visible;
+            background: none transparent;
+            overflow: hidden;
+            opacity: 1;
+        }
+
+        /* DESKTOP */
+        .desktop {
+            top: 40px;
+            right: 0;
+        }
+
+        .desktop-form-display {
+            height: 600px !important;
+            width: 300px !important;
+        }
+
+        /* MOBILE */
+        .mobile {
+            bottom: 0;
+            left: 10px;
+            right: 10px;
+            height: 60px;
+        }
+
+        .mobile-form-display {
+            height: 100% !important;
+            width: 100% !important;
+        }
+
+        #btnOpenChat {
+            display: none;
+        }
+
+    </style>
+
+
+    <!-- END VOCALIZE-CHAT -->
+</head>
+<body style="background-color: darkolivegreen;">
+<h1 style="text-align: center">DEMO SITE</h1>
+<!-- функция openChat принимает в качестве параметров 2 значения. 1 параметр - идентификатор клиента, 2 параметр - тип чата
+Если инициатором нового чата выступает клиент, то 1 параметр обязателен и должен иметь числовое значение (если id отсутствует то необходмо передавать 0),
+второй параметр должен быть равен 1.
+Если инициатором нового чата выступает партнер, то 1 параметр должен быть равен 0, а второй параметр должен быть равен 2. Первый параметр это id клиента, который передаёт заказчик, второй параметр это тип чата, чтобы определить: какой оператор должен обслуживать данного клиента, оператор для клиентов или оператор для партнёров если заказчик передаёт id клиента  то серверная часть чата делает REST запрос в систему заказчика  для получения сведений о клиенте (ФИО, email, telephone)
+Пример для клиента: window.vocalizeChat.openChat(12, 1);
+Пример для партнера: window.vocalizeChat.openChat(0, 2);
+-->
+<!-- START VOCALIZE-CHAT -->
+<a id="btnOpenChat" href="javascript:void(0);" onclick="window.vocalizeChat.openChat(98002375558, 1);">Открыть чат</a>
+<script type='text/javascript'>
+    (function (vocalizeChat) {
+        // var addr = 'https://chat.vocalize.ru/chatserver'; // Раскомментируйте для работы с боевым сервером чата.
+        var addr = 'https://test-chat-server.vocalize.ru/chatserver'; // Раскомментируйте для работы с тестовым сервером чата.
+        // var addr = 'http://localhost:9060/chatserver'; // адрес чата куда стучаться
+        var script = document.createElement('script');
+        script.type = 'text/javascript';
+        script.id = 'chatScript';
+        script.charset = 'utf-8';
+        script.async = true;
+        script.src = addr + '/js/client/widget.js';
+        var sc = document.getElementsByTagName('script')[0];
+        if (sc) sc.parentNode.insertBefore(script, sc); else document.documentElement.firstChild.appendChild(script);
+
+        // вызывается при закрытие окна чата, добавьте свою реализацию
+        vocalizeChat.closeChat = function () {
+            console.log('inside window.vocalizeChat.closeChat()');
+        };
+
+        // если чат доступен, (есть онлайн операторы), то отображать кнопку "Открыть чат",
+        // если нет то скрыть кнопку
+        vocalizeChat.checkChat = function () {
+            <!-- указать тип чата (1 клиенты, 2 партнёры)-->
+            $.get(addr + '/checkChat/1')
+                .done(function (data) {
+                    if (data === true) {
+                        // добавьте свою реализацию
+                        console.log("Chat available");
+                        $("#btnOpenChat").show();   // отображать ссылку для открытия нового чата.
+                    } else {
+                        console.log("Chat not available");
+                        $("#btnOpenChat").hide();  // Не отображать ссылку для открытия нового чата.
+                    }
+                });
+        };
+    }(window.vocalizeChat = window.vocalizeChat || {}));
+
+    $("#btnOpenChat").show();
+    window.vocalizeChat.checkChat();
+    // window.vocalizeChat.openChat(12, 1);
+</script>
+</body>
+</html>
