@@ -8,9 +8,7 @@ import './App.css';
 import type { AppStore } from './redux/reducers'
 import type { Actions } from './redux/actions'
 
-// TODO KK Back button support
-
-class App extends React.Component<Actions & AppStore> {
+class App extends React.Component<Actions & { store: AppStore}> {
 
     componentDidMount(): void {
         this.props.loadDataAction()

@@ -43,7 +43,7 @@ export default (state: AppStore = initialState, action: any): AppStore => {
             const newCountry = newTab === 2 ? queryString.parse(action.payload.location.search).country : undefined;
             return {
                 ...state,
-                activeTab: pathToTabIndex(action.payload.location.pathname),
+                activeTab: newTab,
                 selectedCountry: newCountry ? newCountry : state.selectedCountry,
             };
         case types.ADD_COUNTRY_TO_COMPARISON:
